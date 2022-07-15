@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { receipts } from './components/Records';
+import Receipt from './components/Reciept';
 
 function App() {
+
+  const [customerReceipts, setCustomerReceipts] = useState(receipts)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {customerReceipts.map((receipt, index) => {
+        return <Receipt 
+        name={receipt.person}
+        main={receipt.order.main}
+        protien={receipt.order.protein}
+        rice={receipt.order.rice}
+        sauce={receipt.order.sauce}
+        drink={receipt.order.drink}
+        cost={receipt.order.cost}
+        key={index}
+        />
+      })}
     </div>
   );
 }
